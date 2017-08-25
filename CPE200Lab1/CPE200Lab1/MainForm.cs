@@ -12,7 +12,7 @@ namespace CPE200Lab1
 {
     public partial class MainForm : Form
     {
-        private bool hasDot;
+        private bool hasDot,have2;
         private bool isAllowBack;
         private bool isAfterOperater;
         private bool isAfterEqual;
@@ -104,6 +104,25 @@ namespace CPE200Lab1
 
         private void btnOperator_Click(object sender, EventArgs e)
         {
+            if (have2)
+            {
+                if (lblDisplay.Text is "Error")
+                {
+                    return;
+                }
+                string secondOperand = lblDisplay.Text;
+                string result = calculate(operate, firstOperand, secondOperand);
+                if (result is "E" || result.Length > 8)
+                {
+                    lblDisplay.Text = "Error";
+                }
+                else
+                {
+                    lblDisplay.Text = result;
+                }
+                isAfterEqual = true;
+                have2 = false;
+            }
             if (lblDisplay.Text is "Error")
             {
                 return;
@@ -121,24 +140,7 @@ namespace CPE200Lab1
                 case "÷":
                     firstOperand = lblDisplay.Text;
                     isAfterOperater = true;
-                    if (isAfterOperater)
-                    {
-                        if (lblDisplay.Text is "Error")
-                        {
-                            return;
-                        }
-                        string secondOperand = lblDisplay.Text;
-                        string result = calculate(operate, firstOperand, secondOperand);
-                        if (result is "E" || result.Length > 8)
-                        {
-                            lblDisplay.Text = "Error";
-                        }
-                        else
-                        {
-                            lblDisplay.Text = result;
-                        }
-                        isAfterEqual = true;
-                    }
+                    have2 = true;
                     break;
                 case "%":
                     // your code here
