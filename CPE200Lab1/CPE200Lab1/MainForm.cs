@@ -90,6 +90,7 @@ namespace CPE200Lab1
             }
             if(lblDisplay.Text.Length is 8)
             {
+                lblDisplay.Text = "Error";
                 return;
             }
             isAllowBack = true;
@@ -165,6 +166,7 @@ namespace CPE200Lab1
             {
                 lblDisplay.Text = result;
             }
+            have2 = false;
             isAfterEqual = true;
         }
 
@@ -194,10 +196,6 @@ namespace CPE200Lab1
             if (lblDisplay.Text is "Error")
             {
                 return;
-            }
-            if (isAfterEqual)
-            {
-                resetAll();
             }
             // already contain negative sign
             if (lblDisplay.Text.Length is 8)
