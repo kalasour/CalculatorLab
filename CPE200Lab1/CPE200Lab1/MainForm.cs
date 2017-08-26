@@ -68,14 +68,35 @@ namespace CPE200Lab1
         }
         private void btnMore_function(object sender, EventArgs e)
         {
+            if (lblDisplay.Text is "Error")
+            {
+                return;
+            }
             string click = ((Button)sender).Text;
 
             switch(click)
             {
                 case "%":
                     secondOperand = (Convert.ToDouble(firstOperand) * ((Convert.ToDouble(lblDisplay.Text) / 100))).ToString();
-            lblDisplay.Text = secondOperand;
-       
+                    lblDisplay.Text = secondOperand;
+                    if (lblDisplay.Text.Length > 8)
+                    {
+                        lblDisplay.Text = "Error";
+                    }
+                    break;
+                case "√":
+                    lblDisplay.Text = Math.Sqrt(Convert.ToDouble(lblDisplay.Text)).ToString();
+                    if (lblDisplay.Text.Length > 8)
+                    {
+                        lblDisplay.Text = "Error";
+                    }
+                    break;
+                case "1/X":
+                    lblDisplay.Text = string.Format("{0:0.############}", (1 / Convert.ToDouble(lblDisplay.Text)));
+                    if (lblDisplay.Text.Length > 8)
+                    {
+                        lblDisplay.Text = "Error";
+                    }
                     break;
 
             }
