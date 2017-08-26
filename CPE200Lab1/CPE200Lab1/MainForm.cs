@@ -18,7 +18,7 @@ namespace CPE200Lab1
         private bool isAllowBack;
         private bool isAfterOperater;
         private bool isAfterEqual;
-        private string firstOperand;
+        private string firstOperand, secondOperand;
         private string operate;
 
         private void resetAll()
@@ -66,7 +66,20 @@ namespace CPE200Lab1
             lblDisplay.Text += digit;
             isAfterOperater = false;
         }
+        private void btnMore_function(object sender, EventArgs e)
+        {
+            string click = ((Button)sender).Text;
 
+            switch(click)
+            {
+                case "%":
+                    secondOperand = (Convert.ToDouble(firstOperand) * ((Convert.ToDouble(lblDisplay.Text) / 100))).ToString();
+            lblDisplay.Text = secondOperand;
+       
+                    break;
+
+            }
+        }
         private void btnOperator_Click(object sender, EventArgs e)
         {
             if (have2)
@@ -75,7 +88,7 @@ namespace CPE200Lab1
                 {
                     return;
                 }
-                string secondOperand = lblDisplay.Text;
+                secondOperand = lblDisplay.Text;
                 string result = ku.calculate(operate, firstOperand, secondOperand);
                 if (result is "E" || result.Length > 8)
                 {
@@ -103,7 +116,6 @@ namespace CPE200Lab1
                 case "-":
                 case "X":
                 case "÷":
-                case "%":
                     firstOperand = lblDisplay.Text;
                     isAfterOperater = true;
                     have2 = true;
@@ -209,6 +221,11 @@ namespace CPE200Lab1
         }
 
         private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblDisplay_Click(object sender, EventArgs e)
         {
 
         }
