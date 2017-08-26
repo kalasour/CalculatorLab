@@ -66,6 +66,62 @@ namespace CPE200Lab1
             lblDisplay.Text += digit;
             isAfterOperater = false;
         }
+        private void btnMemory_function(object sender, EventArgs e)
+        {
+            int Mtemp;
+            string command = ((Button)sender).Text;
+            switch(command)
+            {
+                case "M+":
+                    comboBox1.Items[comboBox1.SelectedIndex] = ((Convert.ToDouble(comboBox1.SelectedItem)) + Convert.ToDouble(lblDisplay.Text));
+                    break;
+                case "M-":
+                    comboBox1.Items[comboBox1.SelectedIndex] = ((Convert.ToDouble(comboBox1.SelectedItem)) - Convert.ToDouble(lblDisplay.Text));
+                    break;
+                case "MS":
+                    comboBox1.Items.Add(lblDisplay.Text);
+                    comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
+                    break;
+                case "MR":
+                    if (comboBox1.Items.Count > 0)
+                        lblDisplay.Text = comboBox1.SelectedItem.ToString();
+                    break;
+                case "MC":
+                    comboBox1.Items.Clear();
+                    break;
+                case "MD":
+                    if(comboBox1.Items.Count > 0)
+                    {
+                        Mtemp = comboBox1.SelectedIndex;
+                        comboBox1.Items.Remove(comboBox1.SelectedItem);
+                        Mtemp--;
+                        if (Mtemp < 0)
+                        {
+                            Mtemp = 0;
+                        }
+                        if (comboBox1.Items.Count > 0)
+                            comboBox1.SelectedIndex = Mtemp;
+                    }
+                    break;
+            }
+            if(comboBox1.Items.Count>0)
+            {
+                btnMplus.Enabled = true;
+                btnMminus.Enabled = true;
+                btnMclear.Enabled = true;
+                btnMdelete.Enabled = true;
+                btnMrestore.Enabled = true;
+                comboBox1.Enabled = true;
+            }else
+            {
+                btnMplus.Enabled = false;
+                btnMminus.Enabled = false;
+                btnMclear.Enabled = false;
+                btnMdelete.Enabled = false;
+                btnMrestore.Enabled = false;
+                comboBox1.Enabled = false;
+            }
+        }
         private void btnMore_function(object sender, EventArgs e)
         {
             if (lblDisplay.Text is "Error")
@@ -245,6 +301,7 @@ namespace CPE200Lab1
         {
 
         }
+
 
         private void lblDisplay_Click(object sender, EventArgs e)
         {
