@@ -318,7 +318,6 @@
             // 
             // btnMplus
             // 
-            this.btnMplus.Enabled = false;
             this.btnMplus.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMplus.Location = new System.Drawing.Point(200, 201);
             this.btnMplus.Name = "btnMplus";
@@ -330,7 +329,6 @@
             // 
             // btnMminus
             // 
-            this.btnMminus.Enabled = false;
             this.btnMminus.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnMminus.Location = new System.Drawing.Point(294, 201);
             this.btnMminus.Name = "btnMminus";
@@ -345,7 +343,7 @@
             this.comboBox1.BackColor = System.Drawing.SystemColors.Window;
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.Enabled = false;
-            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(106, 104);
             this.comboBox1.Name = "comboBox1";
@@ -379,7 +377,7 @@
             // 
             this.btnMclear.Enabled = false;
             this.btnMclear.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMclear.Location = new System.Drawing.Point(106, 131);
+            this.btnMclear.Location = new System.Drawing.Point(12, 131);
             this.btnMclear.Name = "btnMclear";
             this.btnMclear.Size = new System.Drawing.Size(88, 64);
             this.btnMclear.TabIndex = 28;
@@ -391,7 +389,7 @@
             // 
             this.btnMdelete.Enabled = false;
             this.btnMdelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMdelete.Location = new System.Drawing.Point(12, 131);
+            this.btnMdelete.Location = new System.Drawing.Point(106, 131);
             this.btnMdelete.Name = "btnMdelete";
             this.btnMdelete.Size = new System.Drawing.Size(88, 64);
             this.btnMdelete.TabIndex = 29;

@@ -73,10 +73,22 @@ namespace CPE200Lab1
             switch(command)
             {
                 case "M+":
+                    if(comboBox1.Items.Count is 0)
+                    {
+                        comboBox1.Items.Add(lblDisplay.Text);
+                        comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
+                    }
+                    else
                     comboBox1.Items[comboBox1.SelectedIndex] = ((Convert.ToDouble(comboBox1.SelectedItem)) + Convert.ToDouble(lblDisplay.Text));
                     break;
                 case "M-":
-                    comboBox1.Items[comboBox1.SelectedIndex] = ((Convert.ToDouble(comboBox1.SelectedItem)) - Convert.ToDouble(lblDisplay.Text));
+                    if (comboBox1.Items.Count is 0)
+                    {
+                        comboBox1.Items.Add(lblDisplay.Text);
+                        comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
+                    }
+                    else
+                        comboBox1.Items[comboBox1.SelectedIndex] = ((Convert.ToDouble(comboBox1.SelectedItem)) - Convert.ToDouble(lblDisplay.Text));
                     break;
                 case "MS":
                     comboBox1.Items.Add(lblDisplay.Text);
@@ -106,16 +118,12 @@ namespace CPE200Lab1
             }
             if(comboBox1.Items.Count>0)
             {
-                btnMplus.Enabled = true;
-                btnMminus.Enabled = true;
                 btnMclear.Enabled = true;
                 btnMdelete.Enabled = true;
                 btnMrestore.Enabled = true;
                 comboBox1.Enabled = true;
             }else
             {
-                btnMplus.Enabled = false;
-                btnMminus.Enabled = false;
                 btnMclear.Enabled = false;
                 btnMdelete.Enabled = false;
                 btnMrestore.Enabled = false;
