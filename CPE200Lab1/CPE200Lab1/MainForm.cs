@@ -68,6 +68,10 @@ namespace CPE200Lab1
         }
         private void btnMemory_function(object sender, EventArgs e)
         {
+            if (lblDisplay.Text is "Error")
+            {
+                return;
+            }
             int Mtemp;
             string command = ((Button)sender).Text;
             switch(command)
@@ -132,6 +136,7 @@ namespace CPE200Lab1
         }
         private void btnMore_function(object sender, EventArgs e)
         {
+            
             if (lblDisplay.Text is "Error")
             {
                 return;
@@ -142,7 +147,8 @@ namespace CPE200Lab1
             {
                 case "%":
                     secondOperand = (Convert.ToDouble(firstOperand) * ((Convert.ToDouble(lblDisplay.Text) / 100))).ToString();
-                    lblDisplay.Text = secondOperand;
+                    lblDisplay.Text = ku.DecimalManage(Convert.ToDouble(secondOperand) );
+                    
                     if (lblDisplay.Text.Length > 8)
                     {
                         lblDisplay.Text = "Error";
@@ -150,13 +156,15 @@ namespace CPE200Lab1
                     break;
                 case "√":
                     lblDisplay.Text = Math.Sqrt(Convert.ToDouble(lblDisplay.Text)).ToString();
+                    lblDisplay.Text = ku.DecimalManage(Convert.ToDouble(lblDisplay.Text));
                     if (lblDisplay.Text.Length > 8)
                     {
                         lblDisplay.Text = "Error";
                     }
                     break;
                 case "1/X":
-                    lblDisplay.Text = string.Format("{0:0.############}", (1 / Convert.ToDouble(lblDisplay.Text)));
+                    lblDisplay.Text = (1 / Convert.ToDouble(lblDisplay.Text)).ToString();
+                    lblDisplay.Text = ku.DecimalManage(Convert.ToDouble(lblDisplay.Text));
                     if (lblDisplay.Text.Length > 8)
                     {
                         lblDisplay.Text = "Error";
@@ -215,7 +223,13 @@ namespace CPE200Lab1
             {
                 return;
             }
-            string secondOperand = lblDisplay.Text;
+            if (isAfterEqual)
+            {
+                lblDisplay.Text= ku.calculate(operate, lblDisplay.Text, secondOperand);
+                return;
+            }
+            secondOperand = lblDisplay.Text;
+            
             string result = ku.calculate(operate, firstOperand, secondOperand);
             if (result is "E" || result.Length > 8)
             {
