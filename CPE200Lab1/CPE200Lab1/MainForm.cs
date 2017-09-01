@@ -77,28 +77,48 @@ namespace CPE200Lab1
             switch(command)
             {
                 case "M+":
-                    if(comboBox1.Items.Count is 0)
-                    {
-                        comboBox1.Items.Add(lblDisplay.Text);
-                        comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
-                    }
-                    else
-                    comboBox1.Items[comboBox1.SelectedIndex] = ((Convert.ToDouble(comboBox1.SelectedItem)) + Convert.ToDouble(lblDisplay.Text));
-                    break;
-                case "M-":
                     if (comboBox1.Items.Count is 0)
                     {
                         comboBox1.Items.Add(lblDisplay.Text);
                         comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
                     }
                     else
-                        comboBox1.Items[comboBox1.SelectedIndex] = ((Convert.ToDouble(comboBox1.SelectedItem)) - Convert.ToDouble(lblDisplay.Text));
+                    {
+                        if (comboBox1.SelectedItem.ToString() == "Error")
+                        {
+                            return;
+                        }
+                        comboBox1.Items[comboBox1.SelectedIndex] = ku.DecimalManage(((Convert.ToDouble(comboBox1.SelectedItem)) + Convert.ToDouble(lblDisplay.Text)));
+                    }
+                        
+                    break;
+                case "M-":
+                    
+                    if (comboBox1.Items.Count is 0)
+                    {
+                        comboBox1.Items.Add(lblDisplay.Text);
+                        comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
+                    }
+                    else
+                    {
+                        if (comboBox1.SelectedItem.ToString() == "Error")
+                        {
+                            return;
+                        }
+                        comboBox1.Items[comboBox1.SelectedIndex] = ku.DecimalManage(((Convert.ToDouble(comboBox1.SelectedItem)) - Convert.ToDouble(lblDisplay.Text)));
+                    }
+
+                        
                     break;
                 case "MS":
-                    comboBox1.Items.Add(lblDisplay.Text);
+                    comboBox1.Items.Add(ku.DecimalManage(Convert.ToDouble(lblDisplay.Text)));
                     comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
                     break;
                 case "MR":
+                    if(comboBox1.SelectedItem.ToString()=="Error")
+                    {
+                        return;
+                    }
                     if (comboBox1.Items.Count > 0)
                         lblDisplay.Text = ku.DecimalManage(Convert.ToDouble(comboBox1.SelectedItem.ToString()));
                     break;
