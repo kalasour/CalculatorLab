@@ -12,14 +12,14 @@ namespace CPE200Lab1
 {
     public partial class MainForm : Form
     {
-        CalculatorEngine ku = new CalculatorEngine();
         private bool hasDot;
-        private bool have2;
         private bool isAllowBack;
         private bool isAfterOperater;
         private bool isAfterEqual;
-        private string firstOperand, secondOperand;
+        private string firstOperand;
         private string operate;
+        private double memory;
+        private CalculatorEngine engine;
 
         private void resetAll()
         {
@@ -28,13 +28,16 @@ namespace CPE200Lab1
             hasDot = false;
             isAfterOperater = false;
             isAfterEqual = false;
-
+            firstOperand = null;
         }
+
+      
 
         public MainForm()
         {
             InitializeComponent();
-
+            memory = 0;
+            engine = new CalculatorEngine();
             resetAll();
         }
 
@@ -51,15 +54,9 @@ namespace CPE200Lab1
             if (isAfterOperater)
             {
                 lblDisplay.Text = "0";
-                  if (hasDot)
-                {
-                     lblDisplay.Text = "0.";
-                }
             }
-            
-            if (lblDisplay.Text.Length is 8)
+            if(lblDisplay.Text.Length is 8)
             {
-                lblDisplay.Text = "Error";
                 return;
             }
             isAllowBack = true;
@@ -71,133 +68,31 @@ namespace CPE200Lab1
             lblDisplay.Text += digit;
             isAfterOperater = false;
         }
-        private void btnMemory_function(object sender, EventArgs e)
+
+        private void btnUnaryOperator_Click(object sender, EventArgs e)
         {
             if (lblDisplay.Text is "Error")
             {
                 return;
             }
-            int Mtemp;
-            string command = ((Button)sender).Text;
-            switch(command)
-            {
-                case "M+":
-                    if (comboBox1.Items.Count is 0)
-                    {
-                        comboBox1.Items.Add(lblDisplay.Text);
-                        comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
-                    }
-                    else
-                    {
-                        if (comboBox1.SelectedItem.ToString() == "Error")
-                        {
-                            return;
-                        }
-                        comboBox1.Items[comboBox1.SelectedIndex] = ku.DecimalManage(((Convert.ToDouble(comboBox1.SelectedItem)) + Convert.ToDouble(lblDisplay.Text)));
-                    }
-                        
-                    break;
-                case "M-":
-                    
-                    if (comboBox1.Items.Count is 0)
-                    {
-                        comboBox1.Items.Add(lblDisplay.Text);
-                        comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
-                    }
-                    else
-                    {
-                        if (comboBox1.SelectedItem.ToString() == "Error")
-                        {
-                            return;
-                        }
-                        comboBox1.Items[comboBox1.SelectedIndex] = ku.DecimalManage(((Convert.ToDouble(comboBox1.SelectedItem)) - Convert.ToDouble(lblDisplay.Text)));
-                    }
-
-                        
-                    break;
-                case "MS":
-                    comboBox1.Items.Add(ku.DecimalManage(Convert.ToDouble(lblDisplay.Text)));
-                    comboBox1.SelectedIndex = comboBox1.Items.Count - 1;
-                    break;
-                case "MR":
-                    if(comboBox1.SelectedItem.ToString()=="Error")
-                    {
-                        return;
-                    }
-                    if (comboBox1.Items.Count > 0)
-                        lblDisplay.Text = ku.DecimalManage(Convert.ToDouble(comboBox1.SelectedItem.ToString()));
-                    break;
-                case "MC":
-                    comboBox1.Items.Clear();
-                    break;
-                case "MD":
-                    if(comboBox1.Items.Count > 0)
-                    {
-                        Mtemp = comboBox1.SelectedIndex;
-                        comboBox1.Items.Remove(comboBox1.SelectedItem);
-                        Mtemp--;
-                        if (Mtemp < 0)
-                        {
-                            Mtemp = 0;
-                        }
-                        if (comboBox1.Items.Count > 0)
-                            comboBox1.SelectedIndex = Mtemp;
-                    }
-                    break;
-            }
-            if(comboBox1.Items.Count>0)
-            {
-                btnMclear.Enabled = true;
-                btnMdelete.Enabled = true;
-                btnMrestore.Enabled = true;
-                comboBox1.Enabled = true;
-            }else
-            {
-                btnMclear.Enabled = false;
-                btnMdelete.Enabled = false;
-                btnMrestore.Enabled = false;
-                comboBox1.Enabled = false;
-            }
-        }
-        private void btnMore_function(object sender, EventArgs e)
-        {
-            
-            if (lblDisplay.Text is "Error")
+            if (isAfterOperater)
             {
                 return;
             }
-            string click = ((Button)sender).Text;
-
-            switch(click)
+            operate = ((Button)sender).Text;
+            firstOperand = lblDisplay.Text;
+            string result = engine.unaryCalculate(operate, firstOperand);
+            if (result is "E" || result.Length > 8)
             {
-                case "%":
-                    secondOperand = (Convert.ToDouble(firstOperand) * ((Convert.ToDouble(lblDisplay.Text) / 100))).ToString();
-                    lblDisplay.Text = ku.DecimalManage(Convert.ToDouble(secondOperand) );
-                    
-                    if (lblDisplay.Text.Length > 8)
-                    {
-                        lblDisplay.Text = "Error";
-                    }
-                    break;
-                case "√":
-                    lblDisplay.Text = Math.Sqrt(Convert.ToDouble(lblDisplay.Text)).ToString();
-                    lblDisplay.Text = ku.DecimalManage(Convert.ToDouble(lblDisplay.Text));
-                    if (lblDisplay.Text.Length > 8)
-                    {
-                        lblDisplay.Text = "Error";
-                    }
-                    break;
-                case "1/X":
-                    lblDisplay.Text = (1 / Convert.ToDouble(lblDisplay.Text)).ToString();
-                    lblDisplay.Text = ku.DecimalManage(Convert.ToDouble(lblDisplay.Text));
-                    if (lblDisplay.Text.Length > 8)
-                    {
-                        lblDisplay.Text = "Error";
-                    }
-                    break;
-
+                lblDisplay.Text = "Error";
             }
+            else
+            {
+                lblDisplay.Text = result;
+            }
+
         }
+
         private void btnOperator_Click(object sender, EventArgs e)
         {
             if (lblDisplay.Text is "Error")
@@ -206,17 +101,12 @@ namespace CPE200Lab1
             }
             if (isAfterOperater)
             {
-                operate = ((Button)sender).Text;
                 return;
             }
-            if (have2)
+            if(firstOperand != null)
             {
-                if (lblDisplay.Text is "Error")
-                {
-                    return;
-                }
-                secondOperand = lblDisplay.Text;
-                string result = ku.calculate(operate, firstOperand, secondOperand);
+                string secondOperand = lblDisplay.Text;
+                string result = engine.calculate(operate, firstOperand, secondOperand);
                 if (result is "E" || result.Length > 8)
                 {
                     lblDisplay.Text = "Error";
@@ -225,10 +115,7 @@ namespace CPE200Lab1
                 {
                     lblDisplay.Text = result;
                 }
-                isAfterEqual = true;
-                have2 = false;
             }
-            
             operate = ((Button)sender).Text;
             switch (operate)
             {
@@ -238,8 +125,9 @@ namespace CPE200Lab1
                 case "÷":
                     firstOperand = lblDisplay.Text;
                     isAfterOperater = true;
-                    hasDot = false;
-                    have2 = true;
+                    break;
+                case "%":
+                    // your code here
                     break;
             }
             isAllowBack = false;
@@ -251,14 +139,8 @@ namespace CPE200Lab1
             {
                 return;
             }
-            if (isAfterEqual)
-            {
-                lblDisplay.Text= ku.calculate(operate, lblDisplay.Text, secondOperand);
-                return;
-            }
-            secondOperand = lblDisplay.Text;
-            
-            string result = ku.calculate(operate, firstOperand, secondOperand);
+            string secondOperand = lblDisplay.Text;
+            string result = engine.calculate(operate, firstOperand, secondOperand);
             if (result is "E" || result.Length > 8)
             {
                 lblDisplay.Text = "Error";
@@ -267,7 +149,6 @@ namespace CPE200Lab1
             {
                 lblDisplay.Text = result;
             }
-            have2 = false;
             isAfterEqual = true;
         }
 
@@ -277,11 +158,6 @@ namespace CPE200Lab1
             {
                 return;
             }
-            if (isAfterOperater)
-            {
-                lblDisplay.Text = "0";
-            }
-
             if (isAfterEqual)
             {
                 resetAll();
@@ -302,6 +178,10 @@ namespace CPE200Lab1
             if (lblDisplay.Text is "Error")
             {
                 return;
+            }
+            if (isAfterEqual)
+            {
+                resetAll();
             }
             // already contain negative sign
             if (lblDisplay.Text.Length is 8)
@@ -352,15 +232,38 @@ namespace CPE200Lab1
             }
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void btnMP_Click(object sender, EventArgs e)
         {
-
+            if(lblDisplay.Text is "Error")
+            {
+                return;
+            }
+            memory += Convert.ToDouble(lblDisplay.Text);
+            isAfterOperater = true;
         }
 
-
-        private void lblDisplay_Click(object sender, EventArgs e)
+        private void btnMC_Click(object sender, EventArgs e)
         {
+            memory = 0;
+        }
 
+        private void btnMM_Click(object sender, EventArgs e)
+        {
+            if(lblDisplay.Text is "Error")
+            {
+                return;
+            }
+            memory -= Convert.ToDouble(lblDisplay.Text);
+            isAfterOperater = true;
+        }
+
+        private void btnMR_Click(object sender, EventArgs e)
+        {
+            if(lblDisplay.Text is "error")
+            {
+                return;
+            }
+            lblDisplay.Text = memory.ToString();
         }
     }
 }
