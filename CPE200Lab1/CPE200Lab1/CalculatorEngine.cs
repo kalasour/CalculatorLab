@@ -28,12 +28,23 @@ namespace CPE200Lab1
         public string Process(string str)
         {
             string[] parts = str.Split(' ');
-            if(!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
+            if (parts.Length < 3) return String.Join(" ", parts).Replace(" #", "");
+            if (!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
             {
                 return "E";
             } else
             {
-                return calculate(parts[1], parts[0], parts[2], 4);
+                parts[0]= calculate(parts[1], parts[0], parts[2], 4);
+                parts[1] = "#";
+                parts[2] = "#";
+                if (parts.Length>=3)
+                {
+                    return Process(String.Join(" ", parts).Replace(" #", ""));
+                }
+                else
+                {
+                    return String.Join(" ", parts).Replace(" #",""); 
+                }   
             }
 
         }

@@ -52,6 +52,10 @@ namespace CPE200Lab1
             {
                 return;
             }
+            if(!isNumberPart)
+            {
+                return;
+            }
             isNumberPart = false;
             isContainDot = false;
             lblDisplay.Text += " " + ((Button)sender).Text + " ";
