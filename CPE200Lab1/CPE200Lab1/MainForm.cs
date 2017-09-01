@@ -100,7 +100,7 @@ namespace CPE200Lab1
                     break;
                 case "MR":
                     if (comboBox1.Items.Count > 0)
-                        lblDisplay.Text = comboBox1.SelectedItem.ToString();
+                        lblDisplay.Text = ku.DecimalManage(Convert.ToDouble(comboBox1.SelectedItem.ToString()));
                     break;
                 case "MC":
                     comboBox1.Items.Clear();

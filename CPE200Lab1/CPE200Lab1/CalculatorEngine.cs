@@ -16,9 +16,13 @@ namespace CPE200Lab1
             switch (operate)
             {
                 case "+":
-                    return (Convert.ToDouble(firstOperand) + Convert.ToDouble(secondOperand)).ToString();
+                    result = (Convert.ToDouble(firstOperand) + Convert.ToDouble(secondOperand));
+                 /*   MessageBox.Show(result.ToString(), secondOperand);
+                    MessageBox.Show(DecimalManage(result), secondOperand);*/
+                    return DecimalManage(result);
                 case "-":
-                    return (Convert.ToDouble(firstOperand) - Convert.ToDouble(secondOperand)).ToString();
+                    result = (Convert.ToDouble(firstOperand) - Convert.ToDouble(secondOperand));
+                    return DecimalManage(result);
                 case "X":
 
                     result = (Convert.ToDouble(firstOperand) * Convert.ToDouble(secondOperand));
