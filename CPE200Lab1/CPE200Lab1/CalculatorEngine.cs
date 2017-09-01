@@ -48,6 +48,19 @@ namespace CPE200Lab1
             }
 
         }
+        public string FindPercent(string str)
+        {
+            string[] parts = str.Split(' ');
+            if (parts.Length < 3) return "Error";
+            if (!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
+            {
+                return "Error";
+            }else
+            {
+                parts[parts.Length - 1] = (Convert.ToDouble(parts[parts.Length - 3]) *Convert.ToDouble(parts[parts.Length - 1])/100).ToString();
+                return string.Join(" ",parts);
+            }
+        }
         public string unaryCalculate(string operate, string operand, int maxOutputSize = 8)
         {
             switch (operate)

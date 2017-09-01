@@ -82,6 +82,7 @@
             this.btnPercent.TabIndex = 37;
             this.btnPercent.Text = "%";
             this.btnPercent.UseVisualStyleBackColor = true;
+            this.btnPercent.Click += new System.EventHandler(this.btnPercent_Click);
             // 
             // btnDivide
             // 
@@ -272,7 +273,8 @@
             // 
             // lblDisplay
             // 
-            this.lblDisplay.AutoSize = true;
+            this.lblDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDisplay.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.lblDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDisplay.Location = new System.Drawing.Point(12, 9);
@@ -312,7 +314,6 @@
             this.Name = "ExtendForm";
             this.Text = "ExtendForm";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
