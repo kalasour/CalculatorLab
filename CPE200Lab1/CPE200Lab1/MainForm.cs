@@ -51,8 +51,13 @@ namespace CPE200Lab1
             if (isAfterOperater)
             {
                 lblDisplay.Text = "0";
+                  if (hasDot)
+                {
+                     lblDisplay.Text = "0.";
+                }
             }
-            if(lblDisplay.Text.Length is 8)
+            
+            if (lblDisplay.Text.Length is 8)
             {
                 lblDisplay.Text = "Error";
                 return;
@@ -195,6 +200,15 @@ namespace CPE200Lab1
         }
         private void btnOperator_Click(object sender, EventArgs e)
         {
+            if (lblDisplay.Text is "Error")
+            {
+                return;
+            }
+            if (isAfterOperater)
+            {
+                operate = ((Button)sender).Text;
+                return;
+            }
             if (have2)
             {
                 if (lblDisplay.Text is "Error")
@@ -214,14 +228,7 @@ namespace CPE200Lab1
                 isAfterEqual = true;
                 have2 = false;
             }
-            if (lblDisplay.Text is "Error")
-            {
-                return;
-            }
-            if (isAfterOperater)
-            {
-                return;
-            }
+            
             operate = ((Button)sender).Text;
             switch (operate)
             {
@@ -231,6 +238,7 @@ namespace CPE200Lab1
                 case "÷":
                     firstOperand = lblDisplay.Text;
                     isAfterOperater = true;
+                    hasDot = false;
                     have2 = true;
                     break;
             }
@@ -269,6 +277,11 @@ namespace CPE200Lab1
             {
                 return;
             }
+            if (isAfterOperater)
+            {
+                lblDisplay.Text = "0";
+            }
+
             if (isAfterEqual)
             {
                 resetAll();

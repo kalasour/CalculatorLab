@@ -411,6 +411,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(394, 627);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnMdelete);
@@ -444,7 +445,7 @@
             this.Controls.Add(this.btn8);
             this.Controls.Add(this.btn7);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "MyCalculator";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
