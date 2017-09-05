@@ -25,41 +25,24 @@ namespace CPE200Lab1
             }
             return false;
         }
+
         public string Process(string str)
         {
-            string[] parts = str.Split(' ');
-            if (parts.Length < 3) return String.Join(" ", parts).Replace(" #", "");
-            if (!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
+            List<string> parts = str.Split(' ').ToList<string>();
+            string result;
+            while(parts.Count > 1)
             {
-                return "E";
-            } else
-            {
-                parts[0]= calculate(parts[1], parts[0], parts[2], 4);
-                parts[1] = "#";
-                parts[2] = "#";
-                if (parts.Length>=3)
+                if(!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
                 {
-                    return Process(String.Join(" ", parts).Replace(" #", ""));
+                    return "E";
+                } else
+                {
+                    result = calculate(parts[1], parts[0], parts[2], 4);
+                    parts.RemoveRange(0, 3);
+                    parts.Insert(0, result);
                 }
-                else
-                {
-                    return String.Join(" ", parts).Replace(" #",""); 
-                }   
             }
-
-        }
-        public string FindPercent(string str)
-        {
-            string[] parts = str.Split(' ');
-            if (parts.Length < 3) return "Error";
-            if (!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
-            {
-                return "Error";
-            }else
-            {
-                parts[parts.Length - 1] = (Convert.ToDouble(parts[parts.Length - 3]) *Convert.ToDouble(parts[parts.Length - 1])/100).ToString();
-                return string.Join(" ",parts);
-            }
+            return parts[0];
         }
         public string unaryCalculate(string operate, string operand, int maxOutputSize = 8)
         {
