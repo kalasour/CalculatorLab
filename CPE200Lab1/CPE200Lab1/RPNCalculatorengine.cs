@@ -14,7 +14,7 @@ namespace CPE200Lab1
             string result="Zero.";
             Stack NumList=new Stack();
             string[] parts= str.Split(' ');
-            if (parts[(parts.Length) - 1] == "") return "E";
+           // if (parts[(parts.Length) - 1] == "") return "E";
             for (int i = parts.Length-1; i >=0; i--)
             {
                 if (isNumber(parts[i]))
