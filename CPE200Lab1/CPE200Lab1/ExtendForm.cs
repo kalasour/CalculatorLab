@@ -62,6 +62,7 @@ namespace CPE200Lab1
             }
             if(!isNumberPart)
             {
+                lblDisplay.Text += ((Button)sender).Text + " ";
                 return;
             }
             isNumberPart = false;
