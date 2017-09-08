@@ -16,7 +16,8 @@ namespace CPE200Lab1
             string[] parts= str.Split(' ');
 
             for (int i = 0; i <parts.Length; i++)
-            {if (isNumber(parts[i]))
+            {
+                if (isNumber(parts[i]))
                 {
                     NumList.Push(parts[i]);
                 }
