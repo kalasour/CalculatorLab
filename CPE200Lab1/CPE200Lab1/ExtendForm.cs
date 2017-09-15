@@ -122,11 +122,11 @@ namespace CPE200Lab1
             {
                 return;
             }
+            string current = lblDisplay.Text;
             if (isNumberPart)
-            {
+            {   
                 return;
             }
-            string current = lblDisplay.Text;
             if (current is "0")
             {
                 lblDisplay.Text = "-";
