@@ -26,30 +26,7 @@ namespace CPE200Lab1
             return false;
         }
 
-        public string Process(string str)
-        {
-            //Split input string to multiple parts by space
-            List<string> parts = str.Split(' ').ToList<string>();
-            string result;
-            //As long as we have more than one part
-            while(parts.Count > 1)
-            {
-                //Check if the first three is ready for calcuation
-                if(!(isNumber(parts[0]) && isOperator(parts[1]) && isNumber(parts[2])))
-                {
-                    return "E";
-                } else
-                {
-                    //Calculate the first three
-                    result = calculate(parts[1], parts[0], parts[2], 4);
-                    //Remove the first three
-                    parts.RemoveRange(0, 3);
-                    // Put back the result
-                    parts.Insert(0, result);
-                }
-            }
-            return parts[0];
-        }
+        
         public string unaryCalculate(string operate, string operand, int maxOutputSize = 8)
         {
             switch (operate)
@@ -125,9 +102,34 @@ namespace CPE200Lab1
                             return "E";
                         }
                         // calculate remaining space for fractional part.
-                        remainLength = maxOutputSize - parts[0].Length - 1;
+                        remainLength = 6 - parts[0].Length - 1;
                         // trim the fractional part gracefully. =
-                        return result.ToString("N" + remainLength);
+                        string returnTo= result.ToString("N" + remainLength);
+                        returnTo = Convert.ToDouble(returnTo).ToString("N" + remainLength);
+                        if (returnTo.IndexOf(".") != -1)
+                        {
+                            for (; ; )
+                            {
+                                if (returnTo[(returnTo.Length) - 1] == '0')
+                                {
+                                    returnTo = returnTo.Substring(0, returnTo.Length - 1);
+                                }
+                                else if (returnTo[(returnTo.Length) - 1] == '.')
+                                {
+                                    returnTo = returnTo.Substring(0, returnTo.Length - 1);
+                                    break;
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                        if (returnTo.Length > 8)
+                        {
+                            return "Error";
+                        }
+                        return returnTo;
                     }
                     break;
                 case "%":

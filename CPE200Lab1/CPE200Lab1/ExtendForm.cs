@@ -15,12 +15,12 @@ namespace CPE200Lab1
         private bool isNumberPart = false;
         private bool isContainDot = false;
         private bool isSpaceAllowed = false;
-        private RPNCalculatorEngine engine;
+        private SimpleCalculatorEngines engine;
 
         public ExtendForm()
         {
             InitializeComponent();
-            engine = new RPNCalculatorEngine();
+            engine = new SimpleCalculatorEngines();
         }
 
         private bool isOperator(char ch)
@@ -58,11 +58,6 @@ namespace CPE200Lab1
         {
             if (lblDisplay.Text is "Error")
             {
-                return;
-            }
-            if(!isNumberPart)
-            {
-                lblDisplay.Text += ((Button)sender).Text + " ";
                 return;
             }
             isNumberPart = false;
@@ -125,11 +120,11 @@ namespace CPE200Lab1
             {
                 return;
             }
-            string current = lblDisplay.Text;
             if (isNumberPart)
-            {   
+            {
                 return;
             }
+            string current = lblDisplay.Text;
             if (current is "0")
             {
                 lblDisplay.Text = "-";
@@ -172,11 +167,6 @@ namespace CPE200Lab1
                 lblDisplay.Text += " ";
                 isSpaceAllowed = false;
             }
-        }
-
-        private void btnPercent_Click(object sender, EventArgs e)
-        {
-          //  lblDisplay.Text = engine.FindPercent(lblDisplay.Text);
         }
     }
 }

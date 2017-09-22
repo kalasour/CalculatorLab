@@ -103,21 +103,7 @@ namespace CPE200Lab1
             {
                 return;
             }
-            if (((Button)sender).Text == "%")
-            {
-                lblDisplay.Text = (Convert.ToDouble(firstOperand) * ((Convert.ToDouble(lblDisplay.Text) / 100))).ToString();
-
-                if (lblDisplay.Text.Length > 8)
-                {
-                    lblDisplay.Text = "Error";
-                }
-                return;
-            }
-            else
-            {
-                operate = ((Button)sender).Text;
-            }
-            if (firstOperand != null)
+            if(firstOperand != null)
             {
                 string secondOperand = lblDisplay.Text;
                 string result = engine.calculate(operate, firstOperand, secondOperand);
@@ -130,6 +116,7 @@ namespace CPE200Lab1
                     lblDisplay.Text = result;
                 }
             }
+            operate = ((Button)sender).Text;
             switch (operate)
             {
                 case "+":
@@ -138,6 +125,9 @@ namespace CPE200Lab1
                 case "÷":
                     firstOperand = lblDisplay.Text;
                     isAfterOperater = true;
+                    break;
+                case "%":
+                    // your code here
                     break;
             }
             isAllowBack = false;
